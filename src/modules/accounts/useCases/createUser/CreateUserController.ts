@@ -1,26 +1,23 @@
-import { hash } from "bcrypt";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
 import { CreateUserUseCase } from "./CreateUserUseCase";
 
 class CreateUserController {
-    async handler(request: Request, response: Response): Promise<Response> {
-        const { name, password, email, driver_license } = request.body;
+  async handler(request: Request, response: Response): Promise<Response> {
+    const { name, password, email, driver_license } = request.body;
 
-        const createUserUseCase = container.resolve(CreateUserUseCase);
+    const createUserUseCase = container.resolve(CreateUserUseCase);
 
-        const passwordHash = await hash(password, 8);
+    await createUserUseCase.execute({
+      name,
+      password,
+      email,
+      driver_license,
+    });
 
-        await createUserUseCase.execute({
-            name,
-            password: passwordHash,
-            email,
-            driver_license,
-        });
-
-        return response.status(201).send();
-    }
+    return response.status(201).send();
+  }
 }
 
 export { CreateUserController };
