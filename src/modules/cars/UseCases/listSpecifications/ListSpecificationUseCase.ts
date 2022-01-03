@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
-import { Category } from "../../entities/Category";
-import { ISpecificationRepository } from "../../repositories/ISpecificationRepository";
+import { Category } from "@modules/cars/entities/Category";
+import { ISpecificationRepository } from "@modules/cars/repositories/ISpecificationRepository";
 
 @injectable()
 class ListSpecificationUseCase {
@@ -13,6 +13,7 @@ class ListSpecificationUseCase {
 
     async execute(): Promise<Category[]> {
         const allSpecifications = await this.specificationRepository.list();
+
         return allSpecifications;
     }
 }

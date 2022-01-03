@@ -2,10 +2,11 @@ import { parse } from "csv-parse";
 import fs from "fs";
 import { inject, injectable } from "tsyringe";
 
-import { ICategoryRespository } from "../../repositories/ICategoryRepository";
+import { ICategoryRespository } from "@modules/cars/repositories/ICategoryRepository";
 
 interface IImportCategory {
     name: string;
+
     description: string;
 }
 
@@ -20,6 +21,7 @@ class ImportCategoryUseCase {
     loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
         return new Promise((resolse, reject) => {
             const stream = fs.createReadStream(file.path);
+
             const categories: IImportCategory[] = [];
 
             const csvParser = parse();
@@ -27,18 +29,23 @@ class ImportCategoryUseCase {
             stream.pipe(csvParser);
 
             csvParser
+
                 .on("data", async (line) => {
                     const [name, description] = line;
 
                     categories.push({
                         name,
+
                         description,
                     });
                 })
+
                 .on("end", () => {
                     fs.promises.unlink(file.path);
+
                     resolse(categories);
                 })
+
                 .on("error", (error) => {
                     reject(error);
                 });

@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
-import { Category } from "../../entities/Category";
-import { ICategoryRespository } from "../../repositories/ICategoryRepository";
+import { Category } from "@modules/cars/entities/Category";
+import { ICategoryRespository } from "@modules/cars/repositories/ICategoryRepository";
 
 @injectable()
 class ListCategoryUseCase {
@@ -13,6 +13,7 @@ class ListCategoryUseCase {
 
     async execute(): Promise<Category[]> {
         const allCategories = await this.categoryRespository.list();
+
         return allCategories;
     }
 }

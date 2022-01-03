@@ -1,10 +1,11 @@
 import { inject, injectable } from "tsyringe";
 
-import { AppError } from "../../../../errors/appErrors";
-import { ISpecificationRepository } from "../../repositories/ISpecificationRepository";
+import { AppError } from "@errors/appErrors";
+import { ISpecificationRepository } from "@modules/cars/repositories/ISpecificationRepository";
 
 interface IRequest {
     name: string;
+
     description: string;
 }
 
@@ -25,6 +26,7 @@ class CreateSpecificationUseCase {
 
         await this.specificationRepository.create({
             name,
+
             description,
         });
     }

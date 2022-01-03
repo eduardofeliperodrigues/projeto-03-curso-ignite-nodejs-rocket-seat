@@ -1,21 +1,28 @@
 import express, { Request, Response, NextFunction } from "express";
+
 import "express-async-errors";
+
 import swaggerUi from "swagger-ui-express";
+
 import "reflect-metadata";
 
-import { AppError } from "./errors/appErrors";
+import { AppError } from "@errors/appErrors";
+
 import { router } from "./routes";
 import swaggerFile from "./swaggerFile.json";
 
 import "./database";
-import "./shared/container";
+
+import "@shared/container";
 
 const app = express();
+
 app.use(express.json());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(router);
+
 app.use((error: Error, request: Request, response: Response, next: NextFunction) => {
     if (error instanceof AppError) {
         return response.status(error.statusCode).json({
@@ -25,6 +32,7 @@ app.use((error: Error, request: Request, response: Response, next: NextFunction)
 
     return response.status(500).json({
         status: "error",
+
         message: `internal server error: ${error.message}`,
     });
 });

@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
-import { deleteFile } from "../../../../utils/file";
-import { UserRepository } from "../../repositories/implementations/UserRepository";
+import { UserRepository } from "@modules/accounts/repositories/implementations/UserRepository";
+import { deleteFile } from "@utils/file";
 
 interface IRequest {
     user_id: string;
@@ -24,6 +24,7 @@ class UpdateUserAvatarUseCase {
         }
 
         user.avatar = avatar_file;
+
         await this.userRepository.create(user);
     }
 }
