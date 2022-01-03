@@ -25,7 +25,7 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register --poll --inspect --transpile-only --respawn src/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --poll --inspect --transpile-only --respawn src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "test": "jest"
   },

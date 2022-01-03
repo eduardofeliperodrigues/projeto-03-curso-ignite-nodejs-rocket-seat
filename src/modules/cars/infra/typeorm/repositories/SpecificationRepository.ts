@@ -1,6 +1,6 @@
 import { Repository, getRepository } from "typeorm";
 
-import { Specification } from "@modules/cars/entities/Specification";
+import { Specification } from "@modules/cars/infra/typeorm/entities/Specification";
 import { ICreateSpecificationDTO, ISpecificationRepository } from "@modules/cars/repositories/ISpecificationRepository";
 
 class SpecificationRepository implements ISpecificationRepository {
@@ -13,7 +13,6 @@ class SpecificationRepository implements ISpecificationRepository {
     async create({ name, description }: ICreateSpecificationDTO): Promise<void> {
         const specification = this.respository.create({
             name,
-
             description,
         });
 

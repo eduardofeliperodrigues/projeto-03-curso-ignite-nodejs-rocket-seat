@@ -6,12 +6,12 @@ import swaggerUi from "swagger-ui-express";
 
 import "reflect-metadata";
 
-import { AppError } from "@errors/appErrors";
+import { AppError } from "@shared/errors/appErrors";
 
+import swaggerFile from "../../../swaggerFile.json";
 import { router } from "./routes";
-import swaggerFile from "./swaggerFile.json";
 
-import "./database";
+import "@shared/infra/typeorm";
 
 import "@shared/container";
 
